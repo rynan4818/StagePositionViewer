@@ -15,8 +15,8 @@ namespace HeadPositionViewer
     [Plugin(RuntimeOptions.DynamicInit)]
     public class Plugin
     {
-        // TODO: If using Harmony, uncomment and change YourGitHub to the name of your GitHub account, or use the form "com.company.project.product"
-        //       You must also add a reference to the Harmony assembly in the Libs folder.
+        // TODO: Harmony を使用している場合、コメントを解除して YourGitHub を GitHub アカウントの名前に変更するか、"com.company.project.product" という形式を使用します。
+        //       また、Libs フォルダに Harmony アセンブリへの参照を追加する必要があります。
         // public const string HarmonyId = "com.github.YourGitHub.HeadPositionViewer";
         // internal static readonly HarmonyLib.Harmony harmony = new HarmonyLib.Harmony(HarmonyId);
 
@@ -26,9 +26,9 @@ namespace HeadPositionViewer
 
         [Init]
         /// <summary>
-        /// Called when the plugin is first loaded by IPA (either when the game starts or when the plugin is enabled if it starts disabled).
-        /// [Init] methods that use a Constructor or called before regular methods like InitWithConfig.
-        /// Only use [Init] with one Constructor.
+        /// IPAによってプラグインが最初にロードされたときに呼び出される（ゲームが開始されたとき、またはプラグインが無効な状態で開始された場合は有効化されたときのいずれか）。
+        /// [Init]コンストラクタを使用するメソッドや、InitWithConfigなどの通常のメソッドの前に呼び出されるメソッド。
+        /// [Init]は1つのコンストラクタにのみ使用してください。
         /// </summary>
         public Plugin(IPALogger logger)
         {
@@ -38,7 +38,7 @@ namespace HeadPositionViewer
         }
 
         #region BSIPA Config
-        //Uncomment to use BSIPA's config
+        //BSIPA の設定を使用する場合はコメントを外してください。
         /*
         [Init]
         public void InitWithConfig(Config conf)
@@ -53,7 +53,7 @@ namespace HeadPositionViewer
         #region Disableable
 
         /// <summary>
-        /// Called when the plugin is enabled (including when the game starts if the plugin is enabled).
+        /// プラグインが有効な場合（プラグインが有効な場合はゲーム開始時も含む）に呼び出されます。
         /// </summary>
         [OnEnable]
         public void OnEnable()
@@ -63,9 +63,9 @@ namespace HeadPositionViewer
         }
 
         /// <summary>
-        /// Called when the plugin is disabled and on Beat Saber quit. It is important to clean up any Harmony patches, GameObjects, and Monobehaviours here.
-        /// The game should be left in a state as if the plugin was never started.
-        /// Methods marked [OnDisable] must return void or Task.
+        /// プラグインを無効にしたときと、Beat Saberの終了時に呼び出される。ここで、Harmonyパッチ、GameObject、Monobehavioursをクリーンアップすることが重要です。
+        /// プラグインを起動しない状態にしておく。
+        /// [OnDisable]の付いたメソッドは、voidまたはTaskを返す必要があります。
         /// </summary>
         [OnDisable]
         public void OnDisable()
@@ -77,9 +77,9 @@ namespace HeadPositionViewer
 
         /*
         /// <summary>
-        /// Called when the plugin is disabled and on Beat Saber quit.
-        /// Return Task for when the plugin needs to do some long-running, asynchronous work to disable.
-        /// [OnDisable] methods that return Task are called after all [OnDisable] methods that return void.
+        /// プラグインが無効のとき、およびBeat Saberの終了時に呼び出されます。
+        /// プラグインが無効化するために長時間実行する非同期作業が必要な場合に、タスクを返します。
+        /// Task を返す[OnDisable]メソッドは、void を返すすべての[OnDisable]メソッドの後に呼び出されます。
         /// </summary>
         [OnDisable]
         public async Task OnDisableAsync()
@@ -89,11 +89,11 @@ namespace HeadPositionViewer
         */
         #endregion
 
-        // Uncomment the methods in this section if using Harmony
+        // Harmonyを使用する場合は、このセクションのメソッドのコメントを外します。
         #region Harmony
         /*
         /// <summary>
-        /// Attempts to apply all the Harmony patches in this assembly.
+        /// このアセンブリに含まれるすべてのHarmonyパッチを適用しようとします。
         /// </summary>
         internal static void ApplyHarmonyPatches()
         {
@@ -110,13 +110,13 @@ namespace HeadPositionViewer
         }
 
         /// <summary>
-        /// Attempts to remove all the Harmony patches that used our HarmonyId.
+        /// HarmonyIdを使用したすべてのHarmonyパッチの削除を試みます。
         /// </summary>
         internal static void RemoveHarmonyPatches()
         {
             try
             {
-                // Removes all patches with this HarmonyId
+                // この HarmonyId を持つすべてのパッチを削除する。
                 harmony.UnpatchAll(HarmonyId);
             }
             catch (Exception ex)
