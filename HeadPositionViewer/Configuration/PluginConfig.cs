@@ -7,7 +7,9 @@ namespace HeadPositionViewer.Configuration
     internal class PluginConfig
     {
         public static PluginConfig Instance { get; set; }
-        //public virtual int IntValue { get; set; } = 42; // BSIPAが値の変更を検出し、自動的に設定を保存したい場合は、'virtual'でなければなりません。
+
+        // BSIPAが値の変更を検出し、自動的に設定を保存したい場合は、'virtual'でなければなりません。
+        public virtual float movementSensitivityThreshold { get; set; } = 0.01f;  //HMD移動検出の閾値
 
         /// <summary>
         /// これは、BSIPAが設定ファイルを読み込むたびに（ファイルの変更が検出されたときを含めて）呼び出されます。
