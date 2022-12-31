@@ -11,7 +11,7 @@ namespace HeadPositionViewer.Configuration
         // BSIPAが値の変更を検出し、自動的に設定を保存したい場合は、'virtual'でなければなりません。
         public virtual bool Enable { get; set; } = true;
         public virtual bool LockPosition { get; set; } = false;
-        public virtual float movementSensitivityThreshold { get; set; } = 0.01f;  //HMD移動検出の閾値
+        public virtual float movementSensitivityThreshold { get; set; } = 0.001f;  //HMD移動検出の閾値
         public virtual float ScreenPosX { get; set; } = 0f;
         public virtual float ScreenPosY { get; set; } = 0.7f;
         public virtual float ScreenPosZ { get; set; } = -1.1f;
@@ -20,6 +20,13 @@ namespace HeadPositionViewer.Configuration
         public virtual float ScreenRotZ { get; set; } = 0;
         public virtual float ScreenSize { get; set; } = 40f;
         public virtual int ScreenLayer { get; set; } = 5;
+        public virtual float FloantLimitLine { get; set; } = 0.7f;
+        public virtual float BackLimitLine { get; set; } = 0.5f;
+        public virtual float RightLimitLine { get; set; } = 1f;
+        public virtual float LeftLimitLine { get; set; } = 1f;
+        public virtual float WarningPercentage1 { get; set; } = 0.4f;
+        public virtual float WarningPercentage2 { get; set; } = 0.8f;
+        public virtual float CenterLimitX { get; set; } = 0.011f;
         /// <summary>
         /// これは、BSIPAが設定ファイルを読み込むたびに（ファイルの変更が検出されたときを含めて）呼び出されます。
         /// </summary>
