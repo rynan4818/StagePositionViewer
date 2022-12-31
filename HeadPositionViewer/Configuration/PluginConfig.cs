@@ -9,8 +9,17 @@ namespace HeadPositionViewer.Configuration
         public static PluginConfig Instance { get; set; }
 
         // BSIPAが値の変更を検出し、自動的に設定を保存したい場合は、'virtual'でなければなりません。
+        public virtual bool Enable { get; set; } = true;
+        public virtual bool LockPosition { get; set; } = false;
         public virtual float movementSensitivityThreshold { get; set; } = 0.01f;  //HMD移動検出の閾値
-
+        public virtual float ScreenPosX { get; set; } = 0f;
+        public virtual float ScreenPosY { get; set; } = 0.7f;
+        public virtual float ScreenPosZ { get; set; } = -1.1f;
+        public virtual float ScreenRotX { get; set; } = 0;
+        public virtual float ScreenRotY { get; set; } = 0;
+        public virtual float ScreenRotZ { get; set; } = 0;
+        public virtual float ScreenSize { get; set; } = 40f;
+        public virtual int ScreenLayer { get; set; } = 5;
         /// <summary>
         /// これは、BSIPAが設定ファイルを読み込むたびに（ファイルの変更が検出されたときを含めて）呼び出されます。
         /// </summary>

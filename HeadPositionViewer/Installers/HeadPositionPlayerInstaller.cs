@@ -1,4 +1,5 @@
 ﻿using HeadPositionViewer.Models;
+using HeadPositionViewer.Views;
 using Zenject;
 
 namespace HeadPositionViewer.Installers
@@ -7,6 +8,7 @@ namespace HeadPositionViewer.Installers
     {
         public override void InstallBindings()
         {
+            this.Container.BindInterfacesAndSelfTo<HeadPositionUI>().FromNewComponentAsViewController().AsCached().NonLazy();
             this.Container.BindInterfacesAndSelfTo<HeadPositionController>().FromNewComponentOnNewGameObject().AsCached().NonLazy();
         }
     }

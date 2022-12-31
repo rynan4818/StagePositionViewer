@@ -1,4 +1,6 @@
 ﻿using HeadPositionViewer.Configuration;
+using HeadPositionViewer.Views;
+using HMUI;
 using UnityEngine;
 using UnityEngine.XR;
 using Zenject;
@@ -19,15 +21,18 @@ namespace HeadPositionViewer.Models
         public Vector3 _hmdPosition = Vector3.zero;
 
         private IVRPlatformHelper _platformHelper;
+        private HeadPositionUI _headPositionUI;
 
         [Inject]
-        public void Constractor(IVRPlatformHelper helper)
+        public void Constractor(IVRPlatformHelper helper, HeadPositionUI headPositionUI)
         {
             this._platformHelper = helper;
+            this._headPositionUI= headPositionUI;
         }
         public void Start()
         {
             this._platformHelper.GetNodePose(XRNode.Head, 0, out this._prevHMDPosition, out _);
+
         }
         public void Update()
         {
@@ -35,6 +40,7 @@ namespace HeadPositionViewer.Models
             var distance = Vector3.Distance(this._hmdPosition, this._prevHMDPosition);
             if (PluginConfig.Instance.movementSensitivityThreshold < distance)
             {
+                _headPositionUI.HeadMarkMove(this._hmdPosition);
                 this._prevHMDPosition = this._hmdPosition;
             }
         }
