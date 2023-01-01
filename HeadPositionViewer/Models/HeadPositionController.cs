@@ -1,6 +1,6 @@
 ﻿using HeadPositionViewer.Configuration;
 using HeadPositionViewer.Views;
-using HMUI;
+using System;
 using UnityEngine;
 using UnityEngine.XR;
 using Zenject;
@@ -32,17 +32,23 @@ namespace HeadPositionViewer.Models
         public void Start()
         {
             this._platformHelper.GetNodePose(XRNode.Head, 0, out this._prevHMDPosition, out _);
-
         }
         public void Update()
         {
             this._platformHelper.GetNodePose(XRNode.Head, 0, out this._hmdPosition, out _);
             var distance = Vector3.Distance(this._hmdPosition, this._prevHMDPosition);
-            if (PluginConfig.Instance.movementSensitivityThreshold < distance)
+            if (Math.Abs(this._hmdPosition.x) <= PluginConfig.Instance.CenterMovementSensitivityDistance || Math.Abs(this._hmdPosition.z) <= PluginConfig.Instance.CenterMovementSensitivityDistance)
             {
-                _headPositionUI.HeadMarkMove(this._hmdPosition);
-                this._prevHMDPosition = this._hmdPosition;
+                if (PluginConfig.Instance.CenterMovementSensitivityThreshold >= distance)
+                    return;
             }
+            else
+            {
+                if (PluginConfig.Instance.MovementSensitivityThreshold >= distance)
+                    return;
+            }
+            _headPositionUI.HeadMarkMove(this._hmdPosition);
+            this._prevHMDPosition = this._hmdPosition;
         }
     }
 }

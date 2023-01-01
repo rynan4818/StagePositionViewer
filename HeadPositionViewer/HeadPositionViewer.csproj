@@ -122,12 +122,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Installers\HeadPositionMenuInstaller.cs" />
     <Compile Include="Installers\HeadPositionPlayerInstaller.cs" />
     <Compile Include="Models\HeadPositionController.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\HeadPositionUI.cs" />
+    <Compile Include="Views\SettingTabViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="manifest.json" />
@@ -137,6 +139,9 @@
     <None Include="HeadPositionViewer.csproj.user" Condition="Exists('HeadPositionViewer.csproj.user')" />
     <EmbeddedResource Include="Views\HeadPositionUI.bsml">
       <DependentUpon>HeadPositionUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\SettingTabViewController.bsml">
+      <DependentUpon>SettingTabViewController.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

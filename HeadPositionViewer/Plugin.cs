@@ -28,6 +28,7 @@ namespace HeadPositionViewer
             PluginConfig.Instance = conf.Generated<PluginConfig>();
             Log?.Debug("Config loaded");
             zenjector.Install<HeadPositionPlayerInstaller>(Location.Player);
+            zenjector.Install<HeadPositionMenuInstaller>(Location.Menu);
         }
         [OnStart]
         public void OnApplicationStart()

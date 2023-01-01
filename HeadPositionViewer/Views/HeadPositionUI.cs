@@ -29,6 +29,10 @@ namespace HeadPositionViewer.Views
         private readonly TextMeshProUGUI _positionValue;
 
         public const int UI_SORTING_ORDER = 31;
+        public const float STAGE_WIDTH = 3f;
+        public const float STAGE_HIGHT = 2f;
+        public const float CANVAS_MARGIN = 1.25f;
+        public const int HMD_ONLY_LAYER = 6;
         public int _sortinglayerOrder;
         public ImageView _headMarkImg;
         public ImageView _headMarkImg1;
@@ -75,7 +79,8 @@ namespace HeadPositionViewer.Views
                 _headMarkImg1.color = Color.blue;
                 _headMarkImg2.color = Color.blue;
             }
-            _positionValue.text = $"X:{hmdPosition.x.ToString("F3")} Z:{hmdPosition.z.ToString("F3")}";
+            if (this._positionScreen.screenMover.enabled)
+                _positionValue.text = $"X:{hmdPosition.x.ToString("F3")} Z:{hmdPosition.z.ToString("F3")}";
         }
 
         public void DrawLine(string objectName, Vector2 startPos, Vector2 endPos, Color color, float width)
@@ -129,6 +134,7 @@ namespace HeadPositionViewer.Views
             }
             this._positionScreen.ShowHandle = false;
             this._positionScreen.screenMover.enabled = false;
+            _positionValue.enabled = PluginConfig.Instance.PositionValueView;
             foreach (var canvas in this._positionScreen.GetComponentsInChildren<Canvas>())
             {
                 canvas.sortingOrder = this._sortinglayerOrder;
@@ -145,6 +151,7 @@ namespace HeadPositionViewer.Views
             {
                 canvas.sortingOrder = UI_SORTING_ORDER;
             }
+            _positionValue.enabled = true;
             if (PluginConfig.Instance.LockPosition)
             {
                 return;
@@ -159,8 +166,8 @@ namespace HeadPositionViewer.Views
                 yield break;
             yield return new WaitWhile(() => this._positionScreen == null || !this._positionScreen);
             this._positionScreen.ShowHandle = false;
-            var halfWidth = 3f * PluginConfig.Instance.ScreenSize / 2f;
-            var halfHight = 2f * PluginConfig.Instance.ScreenSize / 2f;
+            var halfWidth = STAGE_WIDTH * PluginConfig.Instance.ScreenSize / 2f;
+            var halfHight = STAGE_HIGHT * PluginConfig.Instance.ScreenSize / 2f;
             var lineWidth = PluginConfig.Instance.ScreenSize / 20f;
             DrawLine("1", new Vector2(-halfWidth, -halfHight), new Vector2(halfWidth, -halfHight), Color.white, lineWidth);
             DrawLine("2", new Vector2(halfWidth, -halfHight), new Vector2(halfWidth, halfHight), Color.white, lineWidth);
@@ -169,7 +176,7 @@ namespace HeadPositionViewer.Views
             DrawLine("5", new Vector2(-halfWidth, 0), new Vector2(halfWidth, 0), Color.white, lineWidth / 2f);
             DrawLine("6", new Vector2(0, -halfHight), new Vector2(0, halfHight), Color.white, lineWidth / 2f);
 
-            var flontLimitLine = PluginConfig.Instance.FloantLimitLine * PluginConfig.Instance.ScreenSize;
+            var flontLimitLine = PluginConfig.Instance.FrontLimitLine * PluginConfig.Instance.ScreenSize;
             var backLimitLine = PluginConfig.Instance.BackLimitLine * PluginConfig.Instance.ScreenSize;
             var rightLimitLine = PluginConfig.Instance.RightLimitLine * PluginConfig.Instance.ScreenSize;
             var leftLimitLine = PluginConfig.Instance.LeftLimitLine * PluginConfig.Instance.ScreenSize;
@@ -185,7 +192,7 @@ namespace HeadPositionViewer.Views
             _headMarkImg = _headMarkObject.AddComponent<ImageView>();
             _headMarkImg.sprite = BeatSaberMarkupLanguage.Utilities.ImageResources.WhitePixel;
             _headMarkImg.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
-            _headMarkImg.color = Color.blue;
+            _headMarkImg.color = Color.white;
             var rt = _headMarkObject.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(0.5f, 0.5f);
             rt.anchorMax = new Vector2(0.5f, 0.5f);
@@ -198,7 +205,7 @@ namespace HeadPositionViewer.Views
             _headMarkImg1 = headMark1.AddComponent<ImageView>();
             _headMarkImg1.sprite = BeatSaberMarkupLanguage.Utilities.ImageResources.WhitePixel;
             _headMarkImg1.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
-            _headMarkImg1.color = Color.blue;
+            _headMarkImg1.color = Color.white;
             var rt1 = headMark1.GetComponent<RectTransform>();
             rt1.anchorMin = new Vector2(0.5f, 0.5f);
             rt1.anchorMax = new Vector2(0.5f, 0.5f);
@@ -211,7 +218,7 @@ namespace HeadPositionViewer.Views
             _headMarkImg2 = headMark2.AddComponent<ImageView>();
             _headMarkImg2.sprite = BeatSaberMarkupLanguage.Utilities.ImageResources.WhitePixel;
             _headMarkImg2.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
-            _headMarkImg2.color = Color.blue;
+            _headMarkImg2.color = Color.white;
             var rt2 = headMark2.GetComponent<RectTransform>();
             rt2.anchorMin = new Vector2(0.5f, 0.5f);
             rt2.anchorMax = new Vector2(0.5f, 0.5f);
@@ -219,11 +226,11 @@ namespace HeadPositionViewer.Views
             rt2.anchoredPosition = new Vector2(0, 0);
             rt2.localEulerAngles = new Vector3(0, 0, -45f);
 
-            flontWarning1 = PluginConfig.Instance.FloantLimitLine * PluginConfig.Instance.WarningPercentage1;
+            flontWarning1 = PluginConfig.Instance.FrontLimitLine * PluginConfig.Instance.WarningPercentage1;
             backWarning1 = PluginConfig.Instance.BackLimitLine * PluginConfig.Instance.WarningPercentage1;
             rightWarning1 = PluginConfig.Instance.RightLimitLine * PluginConfig.Instance.WarningPercentage1;
             leftWarning1 = PluginConfig.Instance.LeftLimitLine * PluginConfig.Instance.WarningPercentage1;
-            flontWarning2 = PluginConfig.Instance.FloantLimitLine * PluginConfig.Instance.WarningPercentage2;
+            flontWarning2 = PluginConfig.Instance.FrontLimitLine * PluginConfig.Instance.WarningPercentage2;
             backWarning2 = PluginConfig.Instance.BackLimitLine * PluginConfig.Instance.WarningPercentage2;
             rightWarning2 = PluginConfig.Instance.RightLimitLine * PluginConfig.Instance.WarningPercentage2;
             leftWarning2 = PluginConfig.Instance.LeftLimitLine * PluginConfig.Instance.WarningPercentage2;
@@ -231,6 +238,7 @@ namespace HeadPositionViewer.Views
             _positionValue.color = Color.white;
             _positionValue.overflowMode = TextOverflowModes.Overflow;
             _positionValue.text = $"X:{0.ToString("F3")} Z:{0.ToString("F3")}";
+            _positionValue.enabled = PluginConfig.Instance.PositionValueView;
         }
 
         protected override void OnDestroy()
@@ -275,7 +283,10 @@ namespace HeadPositionViewer.Views
                         canvas.sortingLayerName = energyCanvas.sortingLayerName;
                         this._sortinglayerOrder = energyCanvas.sortingOrder;
                         canvas.sortingOrder = this._sortinglayerOrder;
-                        canvas.gameObject.layer = PluginConfig.Instance.ScreenLayer;
+                        if (PluginConfig.Instance.HmdOnly)
+                            canvas.gameObject.layer = HMD_ONLY_LAYER;
+                        else
+                            canvas.gameObject.layer = PluginConfig.Instance.ScreenLayer;
                     }
                     foreach (var graphic in this._positionScreen.GetComponentsInChildren<Graphic>())
                     {
@@ -306,8 +317,8 @@ namespace HeadPositionViewer.Views
                 this._pauseController.didPauseEvent += this.OnDidPauseEvent;
                 this._pauseController.didResumeEvent += this.OnDidResumeEvent;
             }
-            var width = 3f * PluginConfig.Instance.ScreenSize + 10f;
-            var hight = 2f * PluginConfig.Instance.ScreenSize + 10f;
+            var width = STAGE_WIDTH * PluginConfig.Instance.ScreenSize * CANVAS_MARGIN;
+            var hight = STAGE_HIGHT * PluginConfig.Instance.ScreenSize * CANVAS_MARGIN;
             this._positionScreen = FloatingScreen.CreateFloatingScreen(new Vector2(width, hight), true, new Vector3(PluginConfig.Instance.ScreenPosX, PluginConfig.Instance.ScreenPosY, PluginConfig.Instance.ScreenPosZ), Quaternion.Euler(0f, 0f, 0f));
             this._positionScreen.SetRootViewController(this, HMUI.ViewController.AnimationType.None);
             var canvas = this._positionScreen.GetComponentsInChildren<Canvas>(true).FirstOrDefault();
