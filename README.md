@@ -84,3 +84,8 @@
 | CanvasMargin | 1.25 | キャンバスサイズのステージの枠に対する割合 |
 | ScreenLayer | 5 | 通常表示時のUnityレイヤー (5:UI) |
 | FirstPersonLayer | 6 | FirstPersonOnly有効時のUnityレイヤー (6:FirstPerson) ※メインカメラ(HMD)のカリングマスクを設定します |
+
+# mod製作の参考
+HMDの位置取得の参考にデンパ時計さんの[HeadDistanceTravelled](https://github.com/denpadokei/HeadDistanceTravelled)、ポジション表示の参考に[BeatmapInformation](https://github.com/denpadokei/BeatmapInformation/blob/master/BeatmapInformation)のコードを流用・参考にしています。
+* [HeadDistanceTravelledライセンス](https://github.com/denpadokei/HeadDistanceTravelled/blob/main/LICENSE)
+* [BeatmapInformationライセンス](https://github.com/denpadokei/BeatmapInformation/blob/master/LICENSE)
