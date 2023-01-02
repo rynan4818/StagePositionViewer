@@ -1,12 +1,12 @@
-﻿using HeadPositionViewer.Configuration;
-using HeadPositionViewer.Installers;
+﻿using StagePositionViewer.Configuration;
+using StagePositionViewer.Installers;
 using IPA;
 using IPA.Config;
 using IPA.Config.Stores;
 using SiraUtil.Zenject;
 using IPALogger = IPA.Logging.Logger;
 
-namespace HeadPositionViewer
+namespace StagePositionViewer
 {
     [Plugin(RuntimeOptions.SingleStartInit)]
     public class Plugin
@@ -27,8 +27,8 @@ namespace HeadPositionViewer
             Log?.Debug("Logger initialized.");
             PluginConfig.Instance = conf.Generated<PluginConfig>();
             Log?.Debug("Config loaded");
-            zenjector.Install<HeadPositionPlayerInstaller>(Location.Player);
-            zenjector.Install<HeadPositionMenuInstaller>(Location.Menu);
+            zenjector.Install<StagePositionPlayerInstaller>(Location.Player);
+            zenjector.Install<StagePositionMenuInstaller>(Location.Menu);
         }
         [OnStart]
         public void OnApplicationStart()

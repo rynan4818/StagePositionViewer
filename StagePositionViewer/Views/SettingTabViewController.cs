@@ -1,4 +1,4 @@
-﻿using HeadPositionViewer.Configuration;
+﻿using StagePositionViewer.Configuration;
 using BeatSaberMarkupLanguage.Attributes;
 using BeatSaberMarkupLanguage.GameplaySetup;
 using BeatSaberMarkupLanguage.ViewControllers;
@@ -6,13 +6,13 @@ using System.Globalization;
 using Zenject;
 
 // todo 横と縦の警告閾値は変えたほうが良いか？
-namespace HeadPositionViewer.Views
+namespace StagePositionViewer.Views
 {
     [HotReload(RelativePathToLayout = @"SettingTabViewController.bsml")]
-    [ViewDefinition("HeadPositionViewer.Views.SettingTabViewController.bsml")]
+    [ViewDefinition("StagePositionViewer.Views.SettingTabViewController.bsml")]
     internal class SettingTabViewController : BSMLAutomaticViewController, IInitializable
     {
-        public const string TabName = "Head Position Viewer";
+        public const string TabName = "Stage Position Viewer";
         public string ResourceName => string.Join(".", GetType().Namespace, GetType().Name);
         [UIValue("Enable")]
         public bool Enable

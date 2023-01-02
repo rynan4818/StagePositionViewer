@@ -1,11 +1,11 @@
-﻿using HeadPositionViewer.Configuration;
-using HeadPositionViewer.Views;
+﻿using StagePositionViewer.Configuration;
+using StagePositionViewer.Views;
 using System;
 using UnityEngine;
 using UnityEngine.XR;
 using Zenject;
 
-namespace HeadPositionViewer.Models
+namespace StagePositionViewer.Models
 {
     /// デンパ時計さんの、HeadDistanceTravelledを参考にしてます。
     /// 参考元ソース:https://github.com/denpadokei/HeadDistanceTravelled/blob/main/HeadDistanceTravelled/HeadDistanceTravelledController.cs
@@ -15,19 +15,19 @@ namespace HeadPositionViewer.Models
     /// GameObjectにMonobehaviours（スクリプト）を追加。
     /// Monobehaviourがゲームから受け取ることのできるメッセージの一覧は、https://docs.unity3d.com/ScriptReference/MonoBehaviour.html を参照してください。
     /// </summary>
-    public class HeadPositionController : MonoBehaviour
+    public class StagePositionController : MonoBehaviour
     {
         public Vector3 _prevHMDPosition = Vector3.zero;
         public Vector3 _hmdPosition = Vector3.zero;
 
         private IVRPlatformHelper _platformHelper;
-        private HeadPositionUI _headPositionUI;
+        private StagePositionUI _stagePositionUI;
 
         [Inject]
-        public void Constractor(IVRPlatformHelper helper, HeadPositionUI headPositionUI)
+        public void Constractor(IVRPlatformHelper helper, StagePositionUI stagePositionPositionUI)
         {
             this._platformHelper = helper;
-            this._headPositionUI= headPositionUI;
+            this._stagePositionUI= stagePositionPositionUI;
         }
         public void Start()
         {
@@ -47,7 +47,7 @@ namespace HeadPositionViewer.Models
                 if (PluginConfig.Instance.MovementSensitivityThreshold >= distance)
                     return;
             }
-            _headPositionUI.HeadMarkMove(this._hmdPosition);
+            _stagePositionUI.PlayerMarkMove(this._hmdPosition);
             this._prevHMDPosition = this._hmdPosition;
         }
     }

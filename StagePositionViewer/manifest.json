@@ -1,10 +1,10 @@
 ﻿{
   "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
-  "id": "HeadPositionViewer",
-  "name": "HeadPositionViewer",
+  "id": "StagePositionViewer",
+  "name": "StagePositionViewer",
   "author": "",
   "version": "0.0.1",
-  "description": "Graphical display of HMD position",
+  "description": "Graphical display of stage position",
   "gameVersion": "1.20.0",
   "dependsOn": {
     "BSIPA": "^4.2.0"

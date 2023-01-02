@@ -8,8 +8,8 @@
     <ProjectGuid>{3C38DEF6-1275-41F9-981D-0E3AD46DEA45}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HeadPositionViewer</RootNamespace>
-    <AssemblyName>HeadPositionViewer</AssemblyName>
+    <RootNamespace>StagePositionViewer</RootNamespace>
+    <AssemblyName>StagePositionViewer</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <DebugSymbols>true</DebugSymbols>
@@ -122,13 +122,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Installers\HeadPositionMenuInstaller.cs" />
-    <Compile Include="Installers\HeadPositionPlayerInstaller.cs" />
-    <Compile Include="Models\HeadPositionController.cs" />
+    <Compile Include="Installers\StagePositionMenuInstaller.cs" />
+    <Compile Include="Installers\StagePositionPlayerInstaller.cs" />
+    <Compile Include="Models\StagePositionController.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Configuration\PluginConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\HeadPositionUI.cs" />
+    <Compile Include="Views\StagePositionUI.cs" />
     <Compile Include="Views\SettingTabViewController.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -136,9 +136,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Directory.Build.props" Condition="Exists('Directory.Build.props')" />
-    <None Include="HeadPositionViewer.csproj.user" Condition="Exists('HeadPositionViewer.csproj.user')" />
-    <EmbeddedResource Include="Views\HeadPositionUI.bsml">
-      <DependentUpon>HeadPositionUI.cs</DependentUpon>
+    <None Include="StagePositionViewer.csproj.user" Condition="Exists('StagePositionViewer.csproj.user')" />
+    <EmbeddedResource Include="Views\StagePositionUI.bsml">
+      <DependentUpon>StagePositionUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\SettingTabViewController.bsml">
       <DependentUpon>SettingTabViewController.cs</DependentUpon>

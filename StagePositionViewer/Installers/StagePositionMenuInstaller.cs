@@ -1,9 +1,9 @@
-﻿using HeadPositionViewer.Views;
+﻿using StagePositionViewer.Views;
 using Zenject;
 
-namespace HeadPositionViewer.Installers
+namespace StagePositionViewer.Installers
 {
-    public class HeadPositionMenuInstaller : MonoInstaller
+    public class StagePositionMenuInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {

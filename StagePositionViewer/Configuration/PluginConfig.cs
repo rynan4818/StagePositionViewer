@@ -2,7 +2,7 @@
 using IPA.Config.Stores;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
-namespace HeadPositionViewer.Configuration
+namespace StagePositionViewer.Configuration
 {
     internal class PluginConfig
     {
