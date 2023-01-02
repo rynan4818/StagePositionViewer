@@ -2,13 +2,13 @@
   <settings-container child-control-width='true' child-expand-width='true' size-delta-y='-15'>
     <checkbox-setting text="Enable" value="Enable"  apply-on-change="true"></checkbox-setting>
     <checkbox-setting text="Lock Position" value="LockPosition"  apply-on-change="true"></checkbox-setting>
-    <increment-setting text="Screen Z Position" value="ScreenPosZ" bind-value="true" increment="0.1" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Screen Z Position" value="ScreenPosZ" bind-value="true" increment="1" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
     <horizontal pad-bottom='2'>
       <button text='Reset Center' on-click='ResetCenterPosition'></button>
       <button text='Reset Rotation' on-click='ResetRotation'></button>
       <button text='Default Position' on-click='DefaultPosition'></button>
     </horizontal>
-    <checkbox-setting text="HMD Only View" value="HmdOnly"  apply-on-change="true"></checkbox-setting>
+    <checkbox-setting text="First Person / HMD Only View" value="FirstPersonOnly"  apply-on-change="true"></checkbox-setting>
     <checkbox-setting text="Position Value View" value="PositionValueView"  apply-on-change="true"></checkbox-setting>
     <increment-setting text="Screen Size" value="ScreenSize" increment="1" min="1" formatter="IntFormatter" apply-on-change="true"></increment-setting>
     <increment-setting text="Front Limit Line" value="FrontLimitLine" increment="0.1" min="0.1" max="1.0" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
