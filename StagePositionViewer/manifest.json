@@ -2,11 +2,13 @@
   "$schema": "https://raw.githubusercontent.com/bsmg/BSIPA-MetadataFileSchema/master/Schema.json",
   "id": "StagePositionViewer",
   "name": "StagePositionViewer",
-  "author": "",
-  "version": "0.0.1",
-  "description": "Graphical display of stage position",
+  "author": "Rynan",
+  "version": "0.1.0",
+  "description": "Graphical display of the player's position on stage",
   "gameVersion": "1.20.0",
   "dependsOn": {
-    "BSIPA": "^4.2.0"
+    "BSIPA": "^4.2.2",
+    "BeatSaberMarkupLanguage": "^1.6.3",
+    "SiraUtil": "^3.0.5"
   }
 }
