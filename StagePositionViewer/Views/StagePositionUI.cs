@@ -79,22 +79,28 @@ namespace StagePositionViewer.Views
                 this._positionValue.text = $"X:{playerPosition.x.ToString("F3")} Z:{playerPosition.z.ToString("F3")}";
         }
 
-        public void DrawLine(string objectName, Vector2 startPos, Vector2 endPos, Color color, float width)
+        public (GameObject, ImageView) DrawMark(String markName, Transform parent, Color color, Vector2 sizeDelta, Vector2 anchoredPosition, float angle)
         {
-            var lineObject = new GameObject(objectName);
-            var distance = Vector2.Distance(startPos, endPos);
-            var direction = (endPos - startPos).normalized;
-            var image = lineObject.AddComponent<ImageView>();
+            var markObject = new GameObject(markName);
+            markObject.transform.SetParent(parent, false);
+            var image = markObject.AddComponent<ImageView>();
             image.sprite = BeatSaberMarkupLanguage.Utilities.ImageResources.WhitePixel;
             image.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
             image.color = color;
-            lineObject.transform.SetParent(_positionMapObject.transform, false);
-            var rt = lineObject.GetComponent<RectTransform>();
+            var rt = markObject.GetComponent<RectTransform>();
             rt.anchorMin = new Vector2(0.5f, 0.5f);
             rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.sizeDelta = new Vector2(distance, width);
-            rt.anchoredPosition = startPos + direction * distance * 0.5f;
-            rt.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
+            rt.sizeDelta = sizeDelta;
+            rt.anchoredPosition = anchoredPosition;
+            rt.localEulerAngles = new Vector3(0, 0, angle);
+            return (markObject , image);
+        }
+
+        public void DrawLine(string objectName, Vector2 startPos, Vector2 endPos, Color color, float width)
+        {
+            var distance = Vector2.Distance(startPos, endPos);
+            var direction = (endPos - startPos).normalized;
+            DrawMark(objectName, _positionMapObject.transform, color, new Vector2(distance, width), startPos + direction * distance * 0.5f, Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg);
         }
 
         private void OnHandleReleased(object sender, FloatingScreenHandleEventArgs e)
@@ -175,45 +181,10 @@ namespace StagePositionViewer.Views
             DrawLine("rightLimitLine", new Vector2(rightLimitLine, flontLimitLine), new Vector2(rightLimitLine, -backLimitLine), Color.white, lineWidth / 4f);
             DrawLine("leftLimitLine", new Vector2(-leftLimitLine, flontLimitLine), new Vector2(-leftLimitLine, -backLimitLine), Color.white, lineWidth / 4f);
 
-            _playerMarkObject = new GameObject("playerMark");
-            _playerMarkObject.transform.SetParent(_positionMapObject.transform, false);
             var markSize = PluginConfig.Instance.ScreenSize / 4f;
-            _playerMarkImg = _playerMarkObject.AddComponent<ImageView>();
-            _playerMarkImg.sprite = BeatSaberMarkupLanguage.Utilities.ImageResources.WhitePixel;
-            _playerMarkImg.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
-            _playerMarkImg.color = Color.white;
-            var rt = _playerMarkObject.GetComponent<RectTransform>();
-            rt.anchorMin = new Vector2(0.5f, 0.5f);
-            rt.anchorMax = new Vector2(0.5f, 0.5f);
-            rt.sizeDelta = new Vector2(markSize, markSize);
-            rt.anchoredPosition = new Vector2(0, 0);
-            rt.localEulerAngles = new Vector3(0, 0, 45f);
-
-            var playerMark1 = new GameObject("playerMark1");
-            playerMark1.transform.SetParent(_playerMarkObject.transform, false);
-            _playerMarkImg1 = playerMark1.AddComponent<ImageView>();
-            _playerMarkImg1.sprite = BeatSaberMarkupLanguage.Utilities.ImageResources.WhitePixel;
-            _playerMarkImg1.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
-            _playerMarkImg1.color = Color.white;
-            var rt1 = playerMark1.GetComponent<RectTransform>();
-            rt1.anchorMin = new Vector2(0.5f, 0.5f);
-            rt1.anchorMax = new Vector2(0.5f, 0.5f);
-            rt1.sizeDelta = new Vector2(markSize * 3f, markSize / 5f);
-            rt1.anchoredPosition = new Vector2(0, 0);
-            rt1.localEulerAngles = new Vector3(0, 0, -45f);
-
-            var playerMark2 = new GameObject("playerMark2");
-            playerMark2.transform.SetParent(_playerMarkObject.transform, false);
-            _playerMarkImg2 = playerMark2.AddComponent<ImageView>();
-            _playerMarkImg2.sprite = BeatSaberMarkupLanguage.Utilities.ImageResources.WhitePixel;
-            _playerMarkImg2.material = BeatSaberMarkupLanguage.Utilities.ImageResources.NoGlowMat;
-            _playerMarkImg2.color = Color.white;
-            var rt2 = playerMark2.GetComponent<RectTransform>();
-            rt2.anchorMin = new Vector2(0.5f, 0.5f);
-            rt2.anchorMax = new Vector2(0.5f, 0.5f);
-            rt2.sizeDelta = new Vector2(markSize / 5f, markSize * 3f);
-            rt2.anchoredPosition = new Vector2(0, 0);
-            rt2.localEulerAngles = new Vector3(0, 0, -45f);
+            (_playerMarkObject, _playerMarkImg) = DrawMark("playerMark", _positionMapObject.transform, Color.white, new Vector2(markSize, markSize), Vector2.zero, 45f);
+            _playerMarkImg1 = DrawMark("playerMark1", _playerMarkObject.transform, Color.white, new Vector2(markSize * 3f, markSize / 5f), Vector2.zero, -45f).Item2;
+            _playerMarkImg2 = DrawMark("playerMark2", _playerMarkObject.transform, Color.white, new Vector2(markSize / 5f, markSize * 3f), Vector2.zero, -45f).Item2;
 
             flontWarning1 = PluginConfig.Instance.FrontLimitLine * PluginConfig.Instance.WarningPercentage1;
             backWarning1 = PluginConfig.Instance.BackLimitLine * PluginConfig.Instance.WarningPercentage1;

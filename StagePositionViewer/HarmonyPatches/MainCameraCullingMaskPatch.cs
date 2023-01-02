@@ -12,8 +12,6 @@ namespace StagePositionViewer.HarmonyPatches
         {
             if (PluginConfig.Instance.FirstPersonOnly)
                 ____camera.cullingMask |= 1 << PluginConfig.Instance.FirstPersonLayer;
-            else
-                ____camera.cullingMask &= ~(1 << PluginConfig.Instance.FirstPersonLayer);
         }
     }
 }
