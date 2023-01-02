@@ -84,4 +84,3 @@
 | CanvasMargin | 1.25 | キャンバスサイズのステージの枠に対する割合 |
 | ScreenLayer | 5 | 通常表示時のUnityレイヤー (5:UI) |
 | FirstPersonLayer | 6 | FirstPersonOnly有効時のUnityレイヤー (6:FirstPerson) ※メインカメラ(HMD)のカリングマスクを設定します |
-| 

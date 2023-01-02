@@ -31,10 +31,14 @@ namespace StagePositionViewer.Models
         }
         public void Start()
         {
+            if (!PluginConfig.Instance.Enable)
+                return;
             this._platformHelper.GetNodePose(XRNode.Head, 0, out this._prevHMDPosition, out _);
         }
         public void Update()
         {
+            if (!PluginConfig.Instance.Enable)
+                return;
             this._platformHelper.GetNodePose(XRNode.Head, 0, out this._hmdPosition, out _);
             var distance = Vector3.Distance(this._hmdPosition, this._prevHMDPosition);
             if (PluginConfig.Instance.CenterSignal && (Math.Abs(this._hmdPosition.x) <= PluginConfig.Instance.CenterMovementSensitivityDistance || Math.Abs(this._hmdPosition.z) <= PluginConfig.Instance.CenterMovementSensitivityDistance))

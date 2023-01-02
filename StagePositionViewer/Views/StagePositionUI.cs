@@ -222,6 +222,8 @@ namespace StagePositionViewer.Views
         [UIAction("#post-parse")]
         private void PostParse()
         {
+            if (!PluginConfig.Instance.Enable)
+                return;
             HMMainThreadDispatcher.instance.Enqueue(this.CanvasConfigUpdate());
         }
 
@@ -272,6 +274,8 @@ namespace StagePositionViewer.Views
         private void Constractor(DiContainer container)
         {
             Plugin.Log.Debug("Constractor call");
+            if (!PluginConfig.Instance.Enable)
+                return;
             this._pauseController = container.TryResolve<PauseController>();
             if (this._pauseController != null)
             {
