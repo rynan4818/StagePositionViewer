@@ -63,7 +63,7 @@ namespace StagePositionViewer.Views
                 this._playerMarkImg1.color = Color.yellow;
                 this._playerMarkImg2.color = Color.yellow;
             }
-            else if (playerPosition.x >= -PluginConfig.Instance.CenterLimitX && playerPosition.x <= PluginConfig.Instance.CenterLimitX)
+            else if (PluginConfig.Instance.CenterSignal && playerPosition.x >= -PluginConfig.Instance.CenterLimitX && playerPosition.x <= PluginConfig.Instance.CenterLimitX)
             {
                 this._playerMarkImg.color = Color.white;
                 this._playerMarkImg1.color = Color.white;
@@ -76,7 +76,7 @@ namespace StagePositionViewer.Views
                 this._playerMarkImg2.color = Color.blue;
             }
             if (this._positionScreen.screenMover.enabled)
-                this._positionValue.text = $"X:{playerPosition.x.ToString("F3")} Z:{playerPosition.z.ToString("F3")}";
+                this._positionValue.text = $"X:{playerPosition.x.ToString("F3")}  Z:{playerPosition.z.ToString("F3")}";
         }
 
         public (GameObject, ImageView) DrawMark(String markName, Transform parent, Color color, Vector2 sizeDelta, Vector2 anchoredPosition, float angle)
@@ -163,25 +163,25 @@ namespace StagePositionViewer.Views
             this._positionScreen.ShowHandle = false;
             var halfWidth = PluginConfig.Instance.StageWidth * PluginConfig.Instance.ScreenSize / 2f;
             var halfHight = PluginConfig.Instance.StageHight * PluginConfig.Instance.ScreenSize / 2f;
-            var lineWidth = PluginConfig.Instance.ScreenSize / 20f;
+            var lineWidth = PluginConfig.Instance.ScreenSize * PluginConfig.Instance.LineWidth;
             DrawLine("1", new Vector2(-halfWidth, -halfHight), new Vector2(halfWidth, -halfHight), Color.white, lineWidth);
             DrawLine("2", new Vector2(halfWidth, -halfHight), new Vector2(halfWidth, halfHight), Color.white, lineWidth);
             DrawLine("3", new Vector2(halfWidth, halfHight), new Vector2(-halfWidth, halfHight), Color.white, lineWidth);
             DrawLine("4", new Vector2(-halfWidth, halfHight), new Vector2(-halfWidth, -halfHight), Color.white, lineWidth);
-            DrawLine("5", new Vector2(-halfWidth, 0), new Vector2(halfWidth, 0), Color.white, lineWidth / 2f);
-            DrawLine("6", new Vector2(0, -halfHight), new Vector2(0, halfHight), Color.white, lineWidth / 2f);
+            DrawLine("5", new Vector2(-halfWidth, 0), new Vector2(halfWidth, 0), Color.white, lineWidth / 1.5f);
+            DrawLine("6", new Vector2(0, -halfHight), new Vector2(0, halfHight), Color.white, lineWidth / 1.5f);
 
             var flontLimitLine = PluginConfig.Instance.FrontLimitLine * PluginConfig.Instance.ScreenSize;
             var backLimitLine = PluginConfig.Instance.BackLimitLine * PluginConfig.Instance.ScreenSize;
             var rightLimitLine = PluginConfig.Instance.RightLimitLine * PluginConfig.Instance.ScreenSize;
             var leftLimitLine = PluginConfig.Instance.LeftLimitLine * PluginConfig.Instance.ScreenSize;
 
-            DrawLine("flontLimitLine", new Vector2(-leftLimitLine, flontLimitLine), new Vector2(rightLimitLine, flontLimitLine), Color.white, lineWidth / 4f);
-            DrawLine("backLimitLine", new Vector2(-leftLimitLine, -backLimitLine), new Vector2(rightLimitLine, -backLimitLine), Color.white, lineWidth / 4f);
-            DrawLine("rightLimitLine", new Vector2(rightLimitLine, flontLimitLine), new Vector2(rightLimitLine, -backLimitLine), Color.white, lineWidth / 4f);
-            DrawLine("leftLimitLine", new Vector2(-leftLimitLine, flontLimitLine), new Vector2(-leftLimitLine, -backLimitLine), Color.white, lineWidth / 4f);
+            DrawLine("flontLimitLine", new Vector2(-leftLimitLine, flontLimitLine), new Vector2(rightLimitLine, flontLimitLine), Color.white, lineWidth / 3f);
+            DrawLine("backLimitLine", new Vector2(-leftLimitLine, -backLimitLine), new Vector2(rightLimitLine, -backLimitLine), Color.white, lineWidth / 3f);
+            DrawLine("rightLimitLine", new Vector2(rightLimitLine, flontLimitLine), new Vector2(rightLimitLine, -backLimitLine), Color.white, lineWidth / 3f);
+            DrawLine("leftLimitLine", new Vector2(-leftLimitLine, flontLimitLine), new Vector2(-leftLimitLine, -backLimitLine), Color.white, lineWidth / 3f);
 
-            var markSize = PluginConfig.Instance.ScreenSize / 4f;
+            var markSize = PluginConfig.Instance.ScreenSize * PluginConfig.Instance.MarkSize;
             (_playerMarkObject, _playerMarkImg) = DrawMark("playerMark", _positionMapObject.transform, Color.white, new Vector2(markSize, markSize), Vector2.zero, 45f);
             _playerMarkImg1 = DrawMark("playerMark1", _playerMarkObject.transform, Color.white, new Vector2(markSize * 3f, markSize / 5f), Vector2.zero, -45f).Item2;
             _playerMarkImg2 = DrawMark("playerMark2", _playerMarkObject.transform, Color.white, new Vector2(markSize / 5f, markSize * 3f), Vector2.zero, -45f).Item2;
@@ -197,8 +197,9 @@ namespace StagePositionViewer.Views
 
             _positionValue.color = Color.white;
             _positionValue.overflowMode = TextOverflowModes.Overflow;
-            _positionValue.text = $"X:{0.ToString("F3")} Z:{0.ToString("F3")}";
+            _positionValue.fontSize= PluginConfig.Instance.ScreenSize / 1.8f;
             _positionValue.enabled = PluginConfig.Instance.PositionValueView;
+            PlayerMarkMove(Vector3.zero);
         }
 
         protected override void OnDestroy()

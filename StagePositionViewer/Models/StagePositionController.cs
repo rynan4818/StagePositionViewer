@@ -37,7 +37,7 @@ namespace StagePositionViewer.Models
         {
             this._platformHelper.GetNodePose(XRNode.Head, 0, out this._hmdPosition, out _);
             var distance = Vector3.Distance(this._hmdPosition, this._prevHMDPosition);
-            if (Math.Abs(this._hmdPosition.x) <= PluginConfig.Instance.CenterMovementSensitivityDistance || Math.Abs(this._hmdPosition.z) <= PluginConfig.Instance.CenterMovementSensitivityDistance)
+            if (PluginConfig.Instance.CenterSignal && (Math.Abs(this._hmdPosition.x) <= PluginConfig.Instance.CenterMovementSensitivityDistance || Math.Abs(this._hmdPosition.z) <= PluginConfig.Instance.CenterMovementSensitivityDistance))
             {
                 if (PluginConfig.Instance.CenterMovementSensitivityThreshold >= distance)
                     return;

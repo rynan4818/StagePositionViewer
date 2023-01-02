@@ -1,7 +1,8 @@
 ﻿<bg xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd'>
   <settings-container child-control-width='true' child-expand-width='true' size-delta-y='-15'>
     <checkbox-setting text="Enable" value="Enable"  apply-on-change="true"></checkbox-setting>
-    <checkbox-setting text="Lock Position" value="LockPosition"  apply-on-change="true"></checkbox-setting>
+    <checkbox-setting text="Lock Screen Position" value="LockPosition"  apply-on-change="true"></checkbox-setting>
+    <text id='position' align='Center' font-size='3' size-delta-x='300' size-delta-y='8'></text>
     <increment-setting text="Screen Z Position" value="ScreenPosZ" bind-value="true" increment="1" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
     <horizontal pad-bottom='2'>
       <button text='Reset Center' on-click='ResetCenterPosition'></button>
@@ -10,13 +11,16 @@
     </horizontal>
     <checkbox-setting text="First Person / HMD Only View" value="FirstPersonOnly"  apply-on-change="true"></checkbox-setting>
     <checkbox-setting text="Position Value View" value="PositionValueView"  apply-on-change="true"></checkbox-setting>
+    <checkbox-setting text="X Center Signal" value="CenterSignal"  apply-on-change="true"></checkbox-setting>
     <increment-setting text="Screen Size" value="ScreenSize" increment="1" min="1" formatter="IntFormatter" apply-on-change="true"></increment-setting>
-    <increment-setting text="Front Limit Line" value="FrontLimitLine" increment="0.1" min="0.1" max="1.0" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
-    <increment-setting text="Back Limit Line" value="BackLimitLine" increment="0.1" min="0.1" max="1.0" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
-    <increment-setting text="Right Limit Line" value="RightLimitLine" increment="0.1" min="0.1" max="1.5" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
-    <increment-setting text="Left Limit Line" value="LeftLimitLine" increment="0.1" min="0.1" max="1.5" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Front Limit Line [m]" value="FrontLimitLine" increment="0.1" min="0.1" max="1.0" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Back Limit Line [m]" value="BackLimitLine" increment="0.1" min="0.1" max="1.0" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Right Limit Line [m]" value="RightLimitLine" increment="0.1" min="0.1" max="1.5" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Left Limit Line [m]" value="LeftLimitLine" increment="0.1" min="0.1" max="1.5" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
     <increment-setting text="Yellow Warning" value="WarningPercentage1" increment="0.1" min="0.1" max="1.0" formatter="PercentageFormatter" apply-on-change="true"></increment-setting>
     <increment-setting text="Red Warning" value="WarningPercentage2" increment="0.1" min="0.1" max="1.0" formatter="PercentageFormatter" apply-on-change="true"></increment-setting>
-    <increment-setting text="X Center Limit" value="CenterLimitX" increment="0.001" min="0.001" max="1.5" formatter="ThirdDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="X Center Limit [m]" value="CenterLimitX" increment="0.001" min="0.001" max="1.5" formatter="ThirdDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Stage Line Width (Screen x)" value="LineWidth" increment="0.01" min="0.01" max="1.0" formatter="SecondDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Player Mark Size (Screen x)" value="MarkSize" increment="0.01" min="0.05" max="1.0" formatter="SecondDecimalFormatter" apply-on-change="true"></increment-setting>
   </settings-container>
 </bg>
