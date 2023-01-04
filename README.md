@@ -10,6 +10,8 @@
 
 ![image](https://user-images.githubusercontent.com/14249877/210227621-3b5585ab-e77a-4067-850e-004ba6ac95be.png)
 
+**[参考動画](https://twitter.com/rynan4818/status/1609911143052742657?s=20&t=z5ONfvXntKOCqtl7XrZwgw)**
+
 # インストール方法
 
 1. [リリースページ](https://github.com/rynan4818/StagePositionViewer/releases)から最新のStagePositionViewerのリリースをダウンロードします。
