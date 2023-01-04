@@ -49,6 +49,9 @@
     ![image](https://user-images.githubusercontent.com/14249877/210228516-1488a5a0-9988-4a2a-bb93-25500f30881d.png)
 
 13. `X Center Signal`をOFFにすると、X(横方向)が壁抜け出来る中心部分でマークが白色にならなくなります。ボッ立ちプレイしない人、白色変化が煩わしい人はOFFにして下さい。
+14. 位置の取得対象デバイスは、HMD以外にも任意のトラッカー等を指定できます。使用する場合は`Custom Target Device`をONにして、`Custom Target Device 1/2`を設定して下さい。2つ設定すると、2デバイスの中間になります。座標が身体の中心からズレている場合は`Target Device X/Z Offset [m]`で調整して下さい。
+
+15. デバイスIDがどれになるかは`TRACKED DEVICE POSITION GET`を押すとデバイス座標一覧が更新されるので、Y座標等から確認して下さい。
 
 # 設定について
 
@@ -74,7 +77,13 @@
 | X Center Limit [m] | 0.011 | 壁抜けX位置の左右(±)の限界位置 |
 | Stage Line Width (Screen x) | 0.05 | ステージ表示ライン太さの、スクリーンサイズに対する割合 |
 | Player Mark Size (Screen x) | 0.3 | プレイヤーマークの大きさの、スクリーンサイズに対する割合 |
-
+| Custom Target Device | OFF | 位置取得対象のデバイスをトラッカー等からカスタムで選びます |
+| Custom Target Device 1 | NONE | カスタム対象デバイスNo.1 |
+| Custom Target Device 2 | NONE | カスタム対象デバイスNo.2 (2つ設定すると2デバイスの中間座標になります) |
+| Target Device X Offset [m] | 0 | カスタム対象デバイスのX座標オフセット値 |
+| Target Device Z Offset [m] | 0 | カスタム対象デバイスのZ座標オフセット値 |
+| TRACKED DEVICE POSITION GET | - | 現在のデバイス座標一覧を取得します |
+| OUTPUT LOG | - | デバイス座標一覧をmodのログに出力します |
 ## 以下は設定ファイル`StagePositionViewer.json`でのみ設定可能
 | 項目 | デフォルト値 | 説明 |
 |------|--------------|------|
