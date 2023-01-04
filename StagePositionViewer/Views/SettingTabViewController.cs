@@ -291,10 +291,9 @@ namespace StagePositionViewer.Views
         private void PostParse()
         {
             PositionUpdate();
-            var desiredCharacteristics = InputDeviceCharacteristics.TrackedDevice;
-            InputDevices.GetDevicesWithCharacteristics(desiredCharacteristics, _trackedDevices);
             TrackedDevicePositionGet();
-            CreateTargetDeviceList();
+            this._simpleTextDropdown1.didSelectCellWithIdxEvent += this.SimpleTextDropdown1_didSelectCellWithIdxEvent;
+            this._simpleTextDropdown2.didSelectCellWithIdxEvent += this.SimpleTextDropdown2_didSelectCellWithIdxEvent;
         }
         public void PositionUpdate()
         {
@@ -321,8 +320,6 @@ namespace StagePositionViewer.Views
                     this._simpleTextDropdown2.SetTexts(_targetDevices);
                     this._simpleTextDropdown1.ReloadData();
                     this._simpleTextDropdown2.ReloadData();
-                    this._simpleTextDropdown1.didSelectCellWithIdxEvent += this.SimpleTextDropdown1_didSelectCellWithIdxEvent;
-                    this._simpleTextDropdown2.didSelectCellWithIdxEvent += this.SimpleTextDropdown2_didSelectCellWithIdxEvent;
                     if (string.IsNullOrEmpty(PluginConfig.Instance.TargetDevice1))
                     {
                         PluginConfig.Instance.TargetDevice1 = _targetDevices.FirstOrDefault() ?? "NONE";
@@ -368,6 +365,9 @@ namespace StagePositionViewer.Views
         [UIAction("TrackedDevicePositionGet")]
         public void TrackedDevicePositionGet()
         {
+            var desiredCharacteristics = InputDeviceCharacteristics.TrackedDevice;
+            InputDevices.GetDevicesWithCharacteristics(desiredCharacteristics, _trackedDevices);
+            CreateTargetDeviceList();
             var devPositionText = "";
             foreach (var device in _trackedDevices)
             {
