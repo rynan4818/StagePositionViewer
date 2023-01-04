@@ -19,14 +19,15 @@ namespace StagePositionViewer.Views
     /// 参考元ソース:https://github.com/denpadokei/BeatmapInformation/blob/master/BeatmapInformation/Views/BeatmapInformationViewController.cs
     /// ライセンス:https://github.com/denpadokei/BeatmapInformation/blob/master/LICENSE
 
-    [HotReload(RelativePathToLayout = @"StagePositionUI.bsml")]
-    [ViewDefinition("StagePositionViewer.Views.StagePositionUI.bsml")]
+    [HotReload]
     public class StagePositionUI : BSMLAutomaticViewController
     {
         [UIObject("positionMap")]
         public readonly GameObject _positionMapObject;
         [UIComponent("positionValue")]
         private readonly TextMeshProUGUI _positionValue;
+        [UIComponent("deviceName")]
+        private readonly TextMeshProUGUI _deviceName;
 
         public const int UI_SORTING_ORDER = 31;
         public int _sortinglayerOrder;
@@ -42,12 +43,15 @@ namespace StagePositionViewer.Views
         public float backWarning2;
         public float rightWarning2;
         public float leftWarning2;
+        public bool _initEnable;
         private FloatingScreen _positionScreen;
         private PauseController _pauseController;
         private static readonly object _lockObject = new object();
 
-        public void PlayerMarkMove(Vector3 playerPosition)
+        public void PlayerMarkMove(Vector3 playerPosition, bool customDeviceEnable = false)
         {
+            if (this._initEnable)
+                return;
             var x = playerPosition.x * PluginConfig.Instance.ScreenSize;
             var z = playerPosition.z * PluginConfig.Instance.ScreenSize;
             this._playerMarkObject.transform.localPosition = new Vector3(x, z);
@@ -75,8 +79,15 @@ namespace StagePositionViewer.Views
                 this._playerMarkImg1.color = Color.blue;
                 this._playerMarkImg2.color = Color.blue;
             }
-            if (this._positionScreen.screenMover.enabled)
+            if (this._positionValue.enabled)
                 this._positionValue.text = $"X:{playerPosition.x.ToString("F3")}  Z:{playerPosition.z.ToString("F3")}";
+            if (this._deviceName.enabled)
+            {
+                if (customDeviceEnable)
+                    this._deviceName.text = "Custom Device";
+                else
+                    this._deviceName.text = "HMD Device";
+            }
         }
 
         public (GameObject, ImageView) DrawMark(String markName, Transform parent, Color color, Vector2 sizeDelta, Vector2 anchoredPosition, float angle)
@@ -130,6 +141,7 @@ namespace StagePositionViewer.Views
             this._positionScreen.ShowHandle = false;
             this._positionScreen.screenMover.enabled = false;
             this._positionValue.enabled = PluginConfig.Instance.PositionValueView;
+            this._deviceName.enabled = PluginConfig.Instance.PositionValueView;
             foreach (var canvas in this._positionScreen.GetComponentsInChildren<Canvas>())
             {
                 canvas.sortingOrder = this._sortinglayerOrder;
@@ -146,7 +158,8 @@ namespace StagePositionViewer.Views
             {
                 canvas.sortingOrder = UI_SORTING_ORDER;
             }
-            _positionValue.enabled = true;
+            this._positionValue.enabled = true;
+            this._deviceName.enabled = true;
             if (PluginConfig.Instance.LockPosition)
             {
                 return;
@@ -155,11 +168,8 @@ namespace StagePositionViewer.Views
             this._positionScreen.screenMover.enabled = true;
         }
 
-        private IEnumerator Start()
+        private void CanvasMarkSet()
         {
-            if (!PluginConfig.Instance.Enable)
-                yield break;
-            yield return new WaitWhile(() => this._positionScreen == null || !this._positionScreen);
             this._positionScreen.ShowHandle = false;
             var halfWidth = PluginConfig.Instance.StageWidth * PluginConfig.Instance.ScreenSize / 2f;
             var halfHight = PluginConfig.Instance.StageHight * PluginConfig.Instance.ScreenSize / 2f;
@@ -198,8 +208,13 @@ namespace StagePositionViewer.Views
             _positionValue.color = Color.white;
             _positionValue.overflowMode = TextOverflowModes.Overflow;
             _positionValue.fontSize= PluginConfig.Instance.ScreenSize / 1.8f;
-            _positionValue.enabled = PluginConfig.Instance.PositionValueView;
+            _deviceName.color= Color.white;
+            _deviceName.overflowMode = TextOverflowModes.Overflow;
+            _deviceName.fontSize = PluginConfig.Instance.ScreenSize / 2.5f;
+            this._initEnable = false;
             PlayerMarkMove(Vector3.zero);
+            _positionValue.enabled = PluginConfig.Instance.PositionValueView;
+            _deviceName.enabled = PluginConfig.Instance.PositionValueView;
         }
 
         protected override void OnDestroy()
@@ -269,11 +284,13 @@ namespace StagePositionViewer.Views
             {
                 Plugin.Log.Error(e);
             }
+            CanvasMarkSet();
         }
         [Inject]
         private void Constractor(DiContainer container)
         {
             Plugin.Log.Debug("Constractor call");
+            this._initEnable = true;
             if (!PluginConfig.Instance.Enable)
                 return;
             this._pauseController = container.TryResolve<PauseController>();

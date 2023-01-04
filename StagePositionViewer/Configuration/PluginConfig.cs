@@ -41,5 +41,10 @@ namespace StagePositionViewer.Configuration
         public virtual float WarningPercentage1 { get; set; } = 0.4f;
         public virtual float WarningPercentage2 { get; set; } = 0.8f;
         public virtual float CenterLimitX { get; set; } = 0.011f;
+        public virtual bool CustomTargetDevice { get; set; } = false;
+        public virtual string TargetDevice1 { get; set; } = "NONE";
+        public virtual string TargetDevice2 { get; set; } = "NONE";
+        public virtual float TargetDeviceOffsetX { get; set; } = 0;
+        public virtual float TargetDeviceOffsetZ { get; set; } = 0;
     }
 }

@@ -22,5 +22,15 @@
     <increment-setting text="X Center Limit [m]" value="CenterLimitX" increment="0.001" min="0.001" max="1.5" formatter="ThirdDecimalFormatter" apply-on-change="true"></increment-setting>
     <increment-setting text="Stage Line Width (Screen x)" value="LineWidth" increment="0.01" min="0.01" max="1.0" formatter="SecondDecimalFormatter" apply-on-change="true"></increment-setting>
     <increment-setting text="Player Mark Size (Screen x)" value="MarkSize" increment="0.01" min="0.05" max="1.0" formatter="SecondDecimalFormatter" apply-on-change="true"></increment-setting>
+    <checkbox-setting text="Custom Target Device" value="CustomTargetDevice"  apply-on-change="true"></checkbox-setting>
+    <dropdown-list-setting text='Custom Target Device 1' id='targetDevice1-dropdown' choices='targetDevice1choices' value='targetDevice1-set'></dropdown-list-setting>
+    <dropdown-list-setting text='Custom Target Device 2' id='targetDevice2-dropdown' choices='targetDevice2choices' value='targetDevice2-set'></dropdown-list-setting>
+    <increment-setting text="Target Device X Offset [m]" value="TargetDeviceOffsetX" increment="0.01" min="-1.0" max="1.0" formatter="SecondDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Target Device Z Offset [m]" value="TargetDeviceOffsetZ" increment="0.01" min="-1.0" max="1.0" formatter="SecondDecimalFormatter" apply-on-change="true"></increment-setting>
+    <horizontal pad-bottom='2'>
+      <button text='Tracked Device Position Get' on-click='TrackedDevicePositionGet'></button>
+      <button text='Output Log' on-click='OutputLog'></button>
+    </horizontal>
+    <text id='TrackedDevicePosition' align='Center' font-size='3' size-delta-x='500' size-delta-y='100'></text>
   </settings-container>
 </bg>
