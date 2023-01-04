@@ -51,7 +51,11 @@
 13. `X Center Signal`をOFFにすると、X(横方向)が壁抜け出来る中心部分でマークが白色にならなくなります。ボッ立ちプレイしない人、白色変化が煩わしい人はOFFにして下さい。
 14. 位置の取得対象デバイスは、HMD以外にも任意のトラッカー等を指定できます。使用する場合は`Custom Target Device`をONにして、`Custom Target Device 1/2`を設定して下さい。2つ設定すると、2デバイスの中間になります。座標が身体の中心からズレている場合は`Target Device X/Z Offset [m]`で調整して下さい。
 
+![image](https://user-images.githubusercontent.com/14249877/210566055-4a6756e9-90b8-4ad7-9a7d-596eca86adbd.png)
+
 15. デバイスIDがどれになるかは`TRACKED DEVICE POSITION GET`を押すとデバイス座標一覧が更新されるので、Y座標等から確認して下さい。
+
+![image](https://user-images.githubusercontent.com/14249877/210566105-b4a6fa77-9e57-4489-b0ea-3c8694be8268.png)
 
 # 設定について
 
