@@ -28,34 +28,34 @@
     例えば、前方ギリギリの場所がZ:0.7、後方ギリギリの場所がZ:-0.5、右側ギリギリの場所がX:1.2、左側ギリギリの場所がX:-1.2だとします。
 3. メニューに戻って、左のMOD設定画面から`STAGE POSITION VIEWER`の設定画面を開きます。
 4. 設定の下の方にある`Front, Back, Right, Left Limit Line [m]`を、それぞれ先程調べた座標値に設定します。マイナスは無視してプラス値で入れて下さい。
+5. その下にある`Yellow, Red Warning`は、Limit Lineに何%近づくとマークの色が変わるかの設定です。好みで調整して下さい。
 
     ![image](https://user-images.githubusercontent.com/14249877/210227968-4b49f862-1976-4e73-bb9a-78da7ef07802.png)
 
-5. その下にある`Yellow, Red Warning`は、Limit Lineに何%近づくとマークの色が変わるかの設定です。好みで調整して下さい。
 6. 再度、適当な譜面をプレイしてポーズして、限界ラインが変わったか確認します。
 7. 次に表示位置です、ポーズ中は白いハンドルが上部に表示されるので、それをコントローラでつかんで移動できます。
 8. 奥行き方向の移動はやりにくいので、一旦先程の設定画面に戻って`Screen Z Position`で調整して下さい。値を小さくするほど近づきます。
+9. 画面の中央にしたい場合は`RESET CENTER`ボタンを押して下さい。また傾きをなくして真正面に向けたい場合は`RESET ROTATION`を押して下さい。初期位置に戻したい場合は`DEFAULT POSITION`です。
 
     ![image](https://user-images.githubusercontent.com/14249877/210228203-072e3c83-aaee-4b72-a46d-16803c088773.png)
 
-9. 画面の中央にしたい場合は`RESET CENTER`ボタンを押して下さい。また傾きをなくして真正面に向けたい場合は`RESET ROTATION`を押して下さい。初期位置に戻したい場合は`DEFAULT POSITION`です。
 10. 奥行方向を移動させる時は`Screen Size`も調整して下さい。値を大きくすると表示が大きくなります。
 
     ![image](https://user-images.githubusercontent.com/14249877/210228363-71a12044-2480-4f46-a355-561c0c40ea3f.png)
 
 11. 位置が決まったら`Lock Screen Position`をONにすると、ポーズしても移動できなくなります。
 12. `First Person / HMD Only View`をONにすると、HMDと一人称画面のみに表示して、三人称カメラからは表示が消えます。ダンスの録画などにどうぞ。
+13. `X Center Signal`をOFFにすると、X(横方向)が壁抜け出来る中心部分でマークが白色にならなくなります。ボッ立ちプレイしない人、白色変化が煩わしい人はOFFにして下さい。
 
     ![image](https://user-images.githubusercontent.com/14249877/210228516-1488a5a0-9988-4a2a-bb93-25500f30881d.png)
 
-13. `X Center Signal`をOFFにすると、X(横方向)が壁抜け出来る中心部分でマークが白色にならなくなります。ボッ立ちプレイしない人、白色変化が煩わしい人はOFFにして下さい。
-14. 位置の取得対象デバイスは、HMD以外にも任意のトラッカー等を指定できます。使用する場合は`Custom Target Device`をONにして、`Custom Target Device 1/2`を設定して下さい。2つ設定すると、2デバイスの中間になります。座標が身体の中心からズレている場合は`Target Device X/Z Offset [m]`で調整して下さい。
+14. 位置の取得対象デバイスは、HMD以外にも任意のトラッカー等を指定できます。ダンスプレイ等では腰トラにしたほうが身体の中心が分かって良いかもしれません。使用する場合は`Custom Target Device`をONにして、`Custom Target Device 1/2`を設定して下さい。2つ設定すると、2デバイスの中間になります。座標が身体の中心からズレている場合は`Target Device X/Z Offset [m]`で調整して下さい。
 
-![image](https://user-images.githubusercontent.com/14249877/210566055-4a6756e9-90b8-4ad7-9a7d-596eca86adbd.png)
+    ![image](https://user-images.githubusercontent.com/14249877/210566055-4a6756e9-90b8-4ad7-9a7d-596eca86adbd.png)
 
-15. デバイスIDがどれになるかは`TRACKED DEVICE POSITION GET`を押すとデバイス座標一覧が更新されるので、Y座標等から確認して下さい。
+15. デバイスIDがどれになるかは`TRACKED DEVICE POSITION GET`を押すとデバイス座標一覧が更新されるので、Y座標等から判断して確認して下さい。ちなみにベースステーション等も表示されています、Y座標が2m以上になっているので判ると思います。
 
-![image](https://user-images.githubusercontent.com/14249877/210566105-b4a6fa77-9e57-4489-b0ea-3c8694be8268.png)
+    ![image](https://user-images.githubusercontent.com/14249877/210566105-b4a6fa77-9e57-4489-b0ea-3c8694be8268.png)
 
 # 設定について
 
