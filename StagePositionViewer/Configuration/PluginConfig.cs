@@ -1,5 +1,8 @@
 ﻿using System.Runtime.CompilerServices;
+using CameraUtils.Core;
 using IPA.Config.Stores;
+using IPA.Config.Stores.Attributes;
+using IPA.Config.Stores.Converters;
 
 [assembly: InternalsVisibleTo(GeneratedStore.AssemblyVisibilityTarget)]
 namespace StagePositionViewer.Configuration
@@ -14,7 +17,7 @@ namespace StagePositionViewer.Configuration
         // BSIPAが値の変更を検出し、自動的に設定を保存したい場合は、'virtual'でなければなりません。
         public virtual bool Enable { get; set; } = true;
         public virtual bool LockPosition { get; set; } = false;
-        public virtual bool FirstPersonOnly { get; set; } = false;
+        public virtual bool HMDOnly { get; set; } = false;
         public virtual bool PositionValueView { get; set; } = false;
         public virtual bool CenterSignal { get; set; } = true;
         public virtual float MovementSensitivityThreshold { get; set; } = 0.01f;  //HMD移動検出閾値
@@ -32,8 +35,10 @@ namespace StagePositionViewer.Configuration
         public virtual float ScreenRotY { get; set; } = 0;
         public virtual float ScreenRotZ { get; set; } = 0;
         public virtual float ScreenSize { get; set; } = 40f;
-        public virtual int ScreenLayer { get; set; } = 5;
-        public virtual int FirstPersonLayer { get; set; } = 6;
+        [UseConverter(typeof(EnumConverter<VisibilityLayer>))]
+        public virtual VisibilityLayer DefaultLayer { get; set; } = VisibilityLayer.UI;
+        [UseConverter(typeof(EnumConverter<VisibilityLayer>))]
+        public virtual VisibilityLayer HMDOnlyLayer { get; set; } = VisibilityLayer.HmdOnlyAndReflected;
         public virtual float FrontLimitLine { get; set; } = 0.6f;
         public virtual float BackLimitLine { get; set; } = 0.6f;
         public virtual float RightLimitLine { get; set; } = 1.3f;

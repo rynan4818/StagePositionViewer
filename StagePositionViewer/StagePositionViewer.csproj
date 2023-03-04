@@ -52,6 +52,11 @@
       <Private>False</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="CameraUtils">
+      <HintPath>$(BeatSaberDir)\Plugins\CameraUtils.dll</HintPath>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
     <Reference Include="Rendering">
       <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\Rendering.dll</HintPath>
       <Private>False</Private>
@@ -134,7 +139,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HarmonyPatches\MainCameraCullingMaskPatch.cs" />
     <Compile Include="Installers\StagePositionMenuInstaller.cs" />
     <Compile Include="Installers\StagePositionPlayerInstaller.cs" />
     <Compile Include="Models\StagePositionController.cs" />

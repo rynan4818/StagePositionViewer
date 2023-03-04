@@ -9,7 +9,7 @@
       <button text='Reset Rotation' on-click='ResetRotation'></button>
       <button text='Default Position' on-click='DefaultPosition'></button>
     </horizontal>
-    <checkbox-setting text="First Person / HMD Only View" value="FirstPersonOnly"  apply-on-change="true"></checkbox-setting>
+    <checkbox-setting text="HMD Only View" value="HMDOnly"  apply-on-change="true"></checkbox-setting>
     <checkbox-setting text="Position Value View" value="PositionValueView"  apply-on-change="true"></checkbox-setting>
     <checkbox-setting text="X Center Signal" value="CenterSignal"  apply-on-change="true"></checkbox-setting>
     <increment-setting text="Screen Size" value="ScreenSize" increment="1" min="1" formatter="IntFormatter" apply-on-change="true"></increment-setting>

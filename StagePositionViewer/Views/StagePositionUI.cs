@@ -2,6 +2,7 @@
 using BeatSaberMarkupLanguage.FloatingScreen;
 using BeatSaberMarkupLanguage.ViewControllers;
 using StagePositionViewer.Configuration;
+using CameraUtils.Core;
 using HMUI;
 using IPA.Utilities;
 using System;
@@ -261,10 +262,10 @@ namespace StagePositionViewer.Views
                         canvas.sortingLayerName = energyCanvas.sortingLayerName;
                         this._sortinglayerOrder = energyCanvas.sortingOrder;
                         canvas.sortingOrder = this._sortinglayerOrder;
-                        if (PluginConfig.Instance.FirstPersonOnly)
-                            canvas.gameObject.layer = PluginConfig.Instance.FirstPersonLayer;
+                        if (PluginConfig.Instance.HMDOnly)
+                            canvas.gameObject.SetLayer(PluginConfig.Instance.HMDOnlyLayer);
                         else
-                            canvas.gameObject.layer = PluginConfig.Instance.ScreenLayer;
+                            canvas.gameObject.SetLayer(PluginConfig.Instance.DefaultLayer);
                     }
                     foreach (var graphic in this._positionScreen.GetComponentsInChildren<Graphic>())
                     {

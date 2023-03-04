@@ -61,13 +61,13 @@ namespace StagePositionViewer.Views
                 NotifyPropertyChanged();
             }
         }
-        [UIValue("FirstPersonOnly")]
-        public bool FirstPersonOnly
+        [UIValue("HMDOnly")]
+        public bool HMDOnly
         {
-            get => PluginConfig.Instance.FirstPersonOnly;
+            get => PluginConfig.Instance.HMDOnly;
             set
             {
-                PluginConfig.Instance.FirstPersonOnly = value;
+                PluginConfig.Instance.HMDOnly = value;
             }
         }
         [UIValue("PositionValueView")]
