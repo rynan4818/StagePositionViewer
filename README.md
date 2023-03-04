@@ -16,6 +16,9 @@
 
 1. [リリースページ](https://github.com/rynan4818/StagePositionViewer/releases)から最新のStagePositionViewerのリリースをダウンロードします。
 2. ダウンロードしたzipファイルを`Beat Saber`フォルダに解凍して、`Plugin`フォルダに`StagePositionViewer.dll`ファイルをコピーします。
+3. [CameraUtils](https://github.com/Reezonate/CameraUtils)に依存するため、`CameraUtils.dll`をダウンロードして`Plugin`フォルダにコピーしてください。
+
+    ModAssistantのLibrariesに登録がある場合はそちらからインストールするのが楽です。
 
 # 使い方
 
@@ -44,7 +47,7 @@
     ![image](https://user-images.githubusercontent.com/14249877/210228363-71a12044-2480-4f46-a355-561c0c40ea3f.png)
 
 11. 位置が決まったら`Lock Screen Position`をONにすると、ポーズしても移動できなくなります。
-12. `First Person / HMD Only View`をONにすると、HMDと一人称画面のみに表示して、三人称カメラからは表示が消えます。ダンスの録画などにどうぞ。
+12. `HMD Only View`をONにすると、HMDのみに表示してデスクトップカメラからは表示が消えます。ダンスの録画などにどうぞ。
 13. `X Center Signal`をOFFにすると、X(横方向)が壁抜け出来る中心部分でマークが白色にならなくなります。ボッ立ちプレイしない人、白色変化が煩わしい人はOFFにして下さい。
 
     ![image](https://user-images.githubusercontent.com/14249877/210228516-1488a5a0-9988-4a2a-bb93-25500f30881d.png)
@@ -68,7 +71,7 @@
 | RESET CENTER | - | 表示位置のX位置を0にします |
 | RESET ROTATION | - | 表示位置のX,Y,Z角度を0にします |
 | DEFAULT POSITION | - | 表示位置を初期値にします |
-| First Person / HMD Only View | OFF | 一人称及びHMDのみ表示して、三人称カメラから表示を消します |
+| HMD Only View | OFF | HMDのみに表示して、デスクトップカメラから表示を消します |
 | Position Value View | OFF | プレイ中も座標を表示します |
 | X Center Signal | ON | プレイヤーのX位置が壁抜け出来る範囲の時に白色マークにします |
 | Screen Size | 40 | 表示画面の大きさ |
@@ -97,8 +100,10 @@
 | StageWidth | 3.0 | ステージ横サイズ |
 | StageHight | 2.0 | ステージ縦サイズ |
 | CanvasMargin | 1.25 | キャンバスサイズのステージの枠に対する割合 |
-| ScreenLayer | 5 | 通常表示時のUnityレイヤー (5:UI) |
-| FirstPersonLayer | 6 | FirstPersonOnly有効時のUnityレイヤー (6:FirstPerson) ※メインカメラ(HMD)のカリングマスクを設定します |
+| DefaultLayer | UI | 通常表示時のUnityレイヤー|
+| HMDOnlyLayer | HmdOnlyAndReflected | HMDOnly有効時の表示レイヤー |
+
+※レイヤー設定名は[CameraUtils](https://github.com/Reezonate/CameraUtils)の[VisibilityLayer](https://github.com/Reezonate/CameraUtils/blob/master/CameraUtils/Core/VisibilityLayer.cs)になります。
 
 # mod製作の参考
 HMDの位置取得の参考にデンパ時計さんの[HeadDistanceTravelled](https://github.com/denpadokei/HeadDistanceTravelled)、ポジション表示の参考に[BeatmapInformation](https://github.com/denpadokei/BeatmapInformation/blob/master/BeatmapInformation)のコードを流用・参考にしています。
