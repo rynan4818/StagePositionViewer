@@ -311,6 +311,9 @@ namespace StagePositionViewer.Views
             this._positionScreen.HandleReleased += this.OnHandleReleased;
             this._positionScreen.HandleSide = FloatingScreen.Side.Top;
 
+            //レイヤーはCameraUtilsのVisibilityLayerを参照
+            //https://github.com/Reezonate/CameraUtils/blob/master/CameraUtils/Core/VisibilityLayer.cs
+
             //レイヤー調査
             //var a = "";
             //for(int i=0; i < 32; i++)
