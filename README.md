@@ -19,6 +19,7 @@
 3. [CameraUtils](https://github.com/Reezonate/CameraUtils)に依存するため、`CameraUtils.dll`をダウンロードして`Plugin`フォルダにコピーしてください。
 
     ModAssistantのLibrariesに登録がある場合はそちらからインストールするのが楽です。
+    ![image](https://user-images.githubusercontent.com/14249877/222885321-0d0a2b5b-ccaf-4868-86e9-8d77ca375d38.png)
 
 # 使い方
 
@@ -50,7 +51,7 @@
 12. `HMD Only View`をONにすると、HMDのみに表示してデスクトップカメラからは表示が消えます。ダンスの録画などにどうぞ。
 13. `X Center Signal`をOFFにすると、X(横方向)が壁抜け出来る中心部分でマークが白色にならなくなります。ボッ立ちプレイしない人、白色変化が煩わしい人はOFFにして下さい。
 
-    ![image](https://user-images.githubusercontent.com/14249877/210228516-1488a5a0-9988-4a2a-bb93-25500f30881d.png)
+    ![image](https://user-images.githubusercontent.com/14249877/222885305-1252fe63-c427-4315-9e8c-3081bdeb5de7.png)
 
 14. 位置の取得対象デバイスは、HMD以外にも任意のトラッカー等を指定できます。ダンスプレイ等では腰トラにしたほうが身体の中心が分かって良いかもしれません。使用する場合は`Custom Target Device`をONにして、`Custom Target Device 1/2`を設定して下さい。2つ設定すると、2デバイスの中間になります。座標が身体の中心からズレている場合は`Target Device X/Z Offset [m]`で調整して下さい。
 
