@@ -48,6 +48,32 @@ namespace StagePositionViewer.Views
                 PluginConfig.Instance.LockPosition = value;
             }
         }
+        [UIValue("ScreenPosX")]
+        public float ScreenPosX
+        {
+            get => PluginConfig.Instance.ScreenPosX;
+            set
+            {
+                if (PluginConfig.Instance.ScreenPosX.Equals(value))
+                    return;
+                PluginConfig.Instance.ScreenPosX = value;
+                PositionUpdate();
+                NotifyPropertyChanged();
+            }
+        }
+        [UIValue("ScreenPosY")]
+        public float ScreenPosY
+        {
+            get => PluginConfig.Instance.ScreenPosY;
+            set
+            {
+                if (PluginConfig.Instance.ScreenPosY.Equals(value))
+                    return;
+                PluginConfig.Instance.ScreenPosY = value;
+                PositionUpdate();
+                NotifyPropertyChanged();
+            }
+        }
         [UIValue("ScreenPosZ")]
         public float ScreenPosZ
         {
@@ -57,6 +83,45 @@ namespace StagePositionViewer.Views
                 if (PluginConfig.Instance.ScreenPosZ.Equals(value))
                     return;
                 PluginConfig.Instance.ScreenPosZ = value;
+                PositionUpdate();
+                NotifyPropertyChanged();
+            }
+        }
+        [UIValue("ScreenRotX")]
+        public float ScreenRotX
+        {
+            get => PluginConfig.Instance.ScreenRotX;
+            set
+            {
+                if (PluginConfig.Instance.ScreenRotX.Equals(value))
+                    return;
+                PluginConfig.Instance.ScreenRotX = value;
+                PositionUpdate();
+                NotifyPropertyChanged();
+            }
+        }
+        [UIValue("ScreenRotY")]
+        public float ScreenRotY
+        {
+            get => PluginConfig.Instance.ScreenRotY;
+            set
+            {
+                if (PluginConfig.Instance.ScreenRotY.Equals(value))
+                    return;
+                PluginConfig.Instance.ScreenRotY = value;
+                PositionUpdate();
+                NotifyPropertyChanged();
+            }
+        }
+        [UIValue("ScreenRotZ")]
+        public float ScreenRotZ
+        {
+            get => PluginConfig.Instance.ScreenRotZ;
+            set
+            {
+                if (PluginConfig.Instance.ScreenRotZ.Equals(value))
+                    return;
+                PluginConfig.Instance.ScreenRotZ = value;
                 PositionUpdate();
                 NotifyPropertyChanged();
             }
@@ -264,27 +329,34 @@ namespace StagePositionViewer.Views
         [UIAction("ResetCenterPosition")]
         private void ResetCenterPosition()
         {
-            PluginConfig.Instance.ScreenPosX = 0;
-            PositionUpdate();
+            this.ScreenPosX = 0;
         }
         [UIAction("ResetRotation")]
         private void ResetRotation()
         {
-            PluginConfig.Instance.ScreenRotX = 0;
-            PluginConfig.Instance.ScreenRotY = 0;
-            PluginConfig.Instance.ScreenRotZ = 0;
-            PositionUpdate();
+            this.ScreenRotX = 0;
+            this.ScreenRotY = 0;
+            this.ScreenRotZ = 0;
         }
         [UIAction("DefaultPosition")]
         private void DefaultPosition()
         {
-            PluginConfig.Instance.ScreenPosX = PluginConfig.DefaultScreenPosX;
-            PluginConfig.Instance.ScreenPosY = PluginConfig.DefaultScreenPosY;
+            this.ScreenPosX = PluginConfig.DefaultScreenPosX;
+            this.ScreenPosY = PluginConfig.DefaultScreenPosY;
             this.ScreenPosZ = PluginConfig.DefaultScreenPosZ;
-            PluginConfig.Instance.ScreenRotX = 0;
-            PluginConfig.Instance.ScreenRotY = 0;
-            PluginConfig.Instance.ScreenRotZ = 0;
-            PositionUpdate();
+            this.ScreenRotX = 0;
+            this.ScreenRotY = 0;
+            this.ScreenRotZ = 0;
+        }
+        [UIAction("LoadPosition")]
+        private void LoadPosition()
+        {
+            this.ScreenPosX = PluginConfig.Instance.ScreenPosX;
+            this.ScreenPosY = PluginConfig.Instance.ScreenPosY;
+            this.ScreenPosZ = PluginConfig.Instance.ScreenPosZ;
+            this.ScreenRotX = PluginConfig.Instance.ScreenRotX;
+            this.ScreenRotY = PluginConfig.Instance.ScreenRotY;
+            this.ScreenRotZ = PluginConfig.Instance.ScreenRotZ;
         }
 
         [UIAction("#post-parse")]
@@ -297,7 +369,7 @@ namespace StagePositionViewer.Views
         }
         public void PositionUpdate()
         {
-            this._position.text = $"Screen Position   X={OneDecimalFormatter(PluginConfig.Instance.ScreenPosX)}  Y={OneDecimalFormatter(PluginConfig.Instance.ScreenPosY)}  Z={OneDecimalFormatter(PluginConfig.Instance.ScreenPosZ)}    Rotation   X={IntFormatter(PluginConfig.Instance.ScreenRotX)}  Y={IntFormatter(PluginConfig.Instance.ScreenRotY)}  Z={IntFormatter(PluginConfig.Instance.ScreenRotZ)}";
+            this._position.text = $"Screen  Pos X={OneDecimalFormatter(PluginConfig.Instance.ScreenPosX)}  Y={OneDecimalFormatter(PluginConfig.Instance.ScreenPosY)}  Z={OneDecimalFormatter(PluginConfig.Instance.ScreenPosZ)}    Rot  X={IntFormatter(PluginConfig.Instance.ScreenRotX)}  Y={IntFormatter(PluginConfig.Instance.ScreenRotY)}  Z={IntFormatter(PluginConfig.Instance.ScreenRotZ)}";
         }
 
         public void CreateTargetDeviceList()
@@ -355,6 +427,7 @@ namespace StagePositionViewer.Views
         {
             this._simpleTextDropdown1.didSelectCellWithIdxEvent -= this.SimpleTextDropdown1_didSelectCellWithIdxEvent;
             this._simpleTextDropdown2.didSelectCellWithIdxEvent -= this.SimpleTextDropdown2_didSelectCellWithIdxEvent;
+            GameplaySetup.instance.RemoveTab(TabName);
             base.OnDestroy();
         }
         public void Initialize()

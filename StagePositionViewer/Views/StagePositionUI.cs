@@ -140,7 +140,6 @@ namespace StagePositionViewer.Views
                 return;
             }
             this._positionScreen.ShowHandle = false;
-            this._positionScreen.screenMover.enabled = false;
             this._positionValue.enabled = PluginConfig.Instance.PositionValueView;
             this._deviceName.enabled = PluginConfig.Instance.PositionValueView;
             foreach (var canvas in this._positionScreen.GetComponentsInChildren<Canvas>())
@@ -166,7 +165,6 @@ namespace StagePositionViewer.Views
                 return;
             }
             this._positionScreen.ShowHandle = true;
-            this._positionScreen.screenMover.enabled = true;
         }
 
         private void CanvasMarkSet()
@@ -240,7 +238,7 @@ namespace StagePositionViewer.Views
         {
             if (!PluginConfig.Instance.Enable)
                 return;
-            HMMainThreadDispatcher.instance.Enqueue(this.CanvasConfigUpdate());
+            StartCoroutine(this.CanvasConfigUpdate());
         }
 
         private IEnumerator CanvasConfigUpdate()

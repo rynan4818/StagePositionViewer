@@ -2,8 +2,16 @@
   <settings-container child-control-width='true' child-expand-width='true' size-delta-y='-15'>
     <checkbox-setting text="Enable" value="Enable"  apply-on-change="true"></checkbox-setting>
     <checkbox-setting text="Lock Screen Position" value="LockPosition"  apply-on-change="true"></checkbox-setting>
-    <text id='position' align='Center' font-size='3' size-delta-x='300' size-delta-y='8'></text>
+    <horizontal pad-bottom='2'>
+      <text id='position' align='Center' font-size='3' size-delta-x='200' size-delta-y='8'></text>
+      <button text='Load Position' on-click='LoadPosition'></button>
+    </horizontal>
+    <increment-setting text="Screen X Position" value="ScreenPosX" bind-value="true" increment="0.1" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Screen Y Position" value="ScreenPosY" bind-value="true" increment="0.1" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
     <increment-setting text="Screen Z Position" value="ScreenPosZ" bind-value="true" increment="1" formatter="OneDecimalFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Screen X Rotation" value="ScreenRotX" bind-value="true" increment="10" min="0" max="360" formatter="IntFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Screen Y Rotation" value="ScreenRotY" bind-value="true" increment="10" min="0" max="360" formatter="IntFormatter" apply-on-change="true"></increment-setting>
+    <increment-setting text="Screen Z Rotation" value="ScreenRotZ" bind-value="true" increment="10" min="0" max="360" formatter="IntFormatter" apply-on-change="true"></increment-setting>
     <horizontal pad-bottom='2'>
       <button text='Reset Center' on-click='ResetCenterPosition'></button>
       <button text='Reset Rotation' on-click='ResetRotation'></button>
