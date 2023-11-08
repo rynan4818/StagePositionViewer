@@ -3,7 +3,7 @@
   "id": "StagePositionViewer",
   "name": "StagePositionViewer",
   "author": "Rynan",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "Graphical display of the player's position on stage",
   "gameVersion": "1.31.0",
   "dependsOn": {
