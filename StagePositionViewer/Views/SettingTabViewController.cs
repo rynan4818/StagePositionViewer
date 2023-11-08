@@ -16,8 +16,9 @@ using UnityEngine.UI;
 namespace StagePositionViewer.Views
 {
     [HotReload]
-    internal class SettingTabViewController : BSMLAutomaticViewController, IInitializable
+    internal class SettingTabViewController : BSMLAutomaticViewController, IInitializable, IDisposable
     {
+        private bool _disposedValue;
         public const string TabName = "Stage Position Viewer";
         public string ResourceName => string.Join(".", GetType().Namespace, GetType().Name);
         public List<InputDevice> _trackedDevices { get; private set; } = new List<InputDevice>();
@@ -295,6 +296,33 @@ namespace StagePositionViewer.Views
             this._simpleTextDropdown1.didSelectCellWithIdxEvent += this.SimpleTextDropdown1_didSelectCellWithIdxEvent;
             this._simpleTextDropdown2.didSelectCellWithIdxEvent += this.SimpleTextDropdown2_didSelectCellWithIdxEvent;
         }
+
+        [UIAction("TrackedDevicePositionGet")]
+        public void TrackedDevicePositionGet()
+        {
+            var desiredCharacteristics = InputDeviceCharacteristics.TrackedDevice;
+            InputDevices.GetDevicesWithCharacteristics(desiredCharacteristics, _trackedDevices);
+            CreateTargetDeviceList();
+            var devPositionText = "";
+            foreach (var device in _trackedDevices)
+            {
+                if (device.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position) && device.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation))
+                    devPositionText += $"{device.serialNumber}:   Pos X={SecondDecimalFormatter(position.x)}  Y={SecondDecimalFormatter(position.y)}  Z={SecondDecimalFormatter(position.z)}   Rot X={IntFormatter(rotation.eulerAngles.x)}  Y={IntFormatter(rotation.eulerAngles.y)}  Z={IntFormatter(rotation.eulerAngles.z)}\n";
+            }
+            if (_trackedDevices.Count < 23)
+            {
+                for (int i = _trackedDevices.Count; i <= 23; i++)
+                    devPositionText += "\n";
+            }
+            this._trackedDevicePosition.text = devPositionText;
+        }
+
+        [UIAction("OutputLog")]
+        public void OutputLog()
+        {
+            Plugin.Log.Info(this._trackedDevicePosition.text);
+        }
+
         public void PositionUpdate()
         {
             this._position.text = $"Screen Position   X={OneDecimalFormatter(PluginConfig.Instance.ScreenPosX)}  Y={OneDecimalFormatter(PluginConfig.Instance.ScreenPosY)}  Z={OneDecimalFormatter(PluginConfig.Instance.ScreenPosZ)}    Rotation   X={IntFormatter(PluginConfig.Instance.ScreenRotX)}  Y={IntFormatter(PluginConfig.Instance.ScreenRotY)}  Z={IntFormatter(PluginConfig.Instance.ScreenRotZ)}";
@@ -351,41 +379,29 @@ namespace StagePositionViewer.Views
         {
             PluginConfig.Instance.TargetDevice2 = _targetDevices[arg2];
         }
-        protected override void OnDestroy()
-        {
-            this._simpleTextDropdown1.didSelectCellWithIdxEvent -= this.SimpleTextDropdown1_didSelectCellWithIdxEvent;
-            this._simpleTextDropdown2.didSelectCellWithIdxEvent -= this.SimpleTextDropdown2_didSelectCellWithIdxEvent;
-            base.OnDestroy();
-        }
         public void Initialize()
         {
             GameplaySetup.instance.AddTab(TabName, this.ResourceName, this);
         }
 
-        [UIAction("TrackedDevicePositionGet")]
-        public void TrackedDevicePositionGet()
+        protected virtual void Dispose(bool disposing)
         {
-            var desiredCharacteristics = InputDeviceCharacteristics.TrackedDevice;
-            InputDevices.GetDevicesWithCharacteristics(desiredCharacteristics, _trackedDevices);
-            CreateTargetDeviceList();
-            var devPositionText = "";
-            foreach (var device in _trackedDevices)
+            if (!this._disposedValue)
             {
-                if (device.TryGetFeatureValue(CommonUsages.devicePosition, out Vector3 position) && device.TryGetFeatureValue(CommonUsages.deviceRotation, out Quaternion rotation))
-                    devPositionText += $"{device.serialNumber}:   Pos X={SecondDecimalFormatter(position.x)}  Y={SecondDecimalFormatter(position.y)}  Z={SecondDecimalFormatter(position.z)}   Rot X={IntFormatter(rotation.eulerAngles.x)}  Y={IntFormatter(rotation.eulerAngles.y)}  Z={IntFormatter(rotation.eulerAngles.z)}\n";
+                if (disposing)
+                {
+                    this._simpleTextDropdown1.didSelectCellWithIdxEvent -= this.SimpleTextDropdown1_didSelectCellWithIdxEvent;
+                    this._simpleTextDropdown2.didSelectCellWithIdxEvent -= this.SimpleTextDropdown2_didSelectCellWithIdxEvent;
+                    GameplaySetup.instance.RemoveTab(TabName);
+                }
+                this._disposedValue = true;
             }
-            if (_trackedDevices.Count < 23)
-            {
-                for (int i = _trackedDevices.Count; i <= 23; i++)
-                    devPositionText += "\n";
-            }
-            this._trackedDevicePosition.text = devPositionText;
         }
-
-        [UIAction("OutputLog")]
-        public void OutputLog()
+        public void Dispose()
         {
-            Plugin.Log.Info(this._trackedDevicePosition.text);
+            // このコードを変更しないでください。クリーンアップ コードを 'Dispose(bool disposing)' メソッドに記述します
+            this.Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

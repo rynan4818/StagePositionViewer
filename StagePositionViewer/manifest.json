@@ -3,9 +3,9 @@
   "id": "StagePositionViewer",
   "name": "StagePositionViewer",
   "author": "Rynan",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Graphical display of the player's position on stage",
-  "gameVersion": "1.20.0",
+  "gameVersion": "1.26.0",
   "dependsOn": {
     "BSIPA": "^4.2.2",
     "BeatSaberMarkupLanguage": "^1.6.3",
