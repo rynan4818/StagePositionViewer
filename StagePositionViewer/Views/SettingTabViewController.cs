@@ -19,11 +19,18 @@ namespace StagePositionViewer.Views
     internal class SettingTabViewController : BSMLAutomaticViewController, IInitializable, IDisposable
     {
         private bool _disposedValue;
+        private GameplaySetup _gameplaySetup;
         public const string TabName = "Stage Position Viewer";
         public string ResourceName => string.Join(".", GetType().Namespace, GetType().Name);
         public List<InputDevice> _trackedDevices { get; private set; } = new List<InputDevice>();
 
         public List<string> _targetDevices;
+
+        [Inject]
+        public void Constractor(GameplaySetup gameplaySetup)
+        {
+            this._gameplaySetup = gameplaySetup;
+        }
 
         [UIComponent("position")]
         private readonly TextMeshProUGUI _position;
@@ -453,7 +460,7 @@ namespace StagePositionViewer.Views
         }
         public void Initialize()
         {
-            GameplaySetup.instance.AddTab(TabName, this.ResourceName, this);
+            this._gameplaySetup.AddTab(TabName, this.ResourceName, this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -462,9 +469,9 @@ namespace StagePositionViewer.Views
             {
                 if (disposing)
                 {
+                    this._gameplaySetup?.RemoveTab(TabName);
                     this._simpleTextDropdown1.didSelectCellWithIdxEvent -= this.SimpleTextDropdown1_didSelectCellWithIdxEvent;
                     this._simpleTextDropdown2.didSelectCellWithIdxEvent -= this.SimpleTextDropdown2_didSelectCellWithIdxEvent;
-                    GameplaySetup.instance.RemoveTab(TabName);
                 }
                 this._disposedValue = true;
             }
